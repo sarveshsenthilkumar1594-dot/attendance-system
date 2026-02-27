@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="width:500px; margin:50px auto; text-align:center;">
+
+    <h2>Welcome {{ session['student_name'] }}</h2>
+
+    <div style="background:#f4f4f4; padding:25px; border-radius:10px;">
+
+        <h3>Attendance Summary</h3>
+
+        <p><strong>Total Days:</strong> {{ total_days }}</p>
+        <p><strong>Present:</strong> {{ present_days }}</p>
+        <p><strong>Absent:</strong> {{ absent_days }}</p>
+        <p><strong>Attendance %:</strong> {{ percentage }}%</p>
+
+    </div>
+
+    <br>
+
+    <a href="{{ url_for('mark_attendance') }}">
+        <button style="padding:10px 20px; font-size:16px;">
+            📷 Mark Attendance
+        </button>
+    </a>
+
+    <br><br>
+
+    <a href="{{ url_for('student_logout') }}">
+        <button style="padding:10px 20px; background:red; color:white;">
+            Logout
+        </button>
+    </a>
+
+</div>
+{% endblock %}

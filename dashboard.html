@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card card-large">
+        <h2>Dashboard</h2>
+
+        <!-- Statistics Section -->
+        <div class="stats-container">
+            <div class="stat-box blue">
+                <h3>Total Students</h3>
+                <p>{{ total_students }}</p>
+            </div>
+
+            <div class="stat-box green">
+                <h3>Present Today</h3>
+                <p>{{ present_today }}</p>
+            </div>
+
+            <div class="stat-box red">
+                <h3>Absent Today</h3>
+                <p>{{ absent_today }}</p>
+            </div>
+
+            <div class="stat-box purple">
+                <h3>Overall Attendance %</h3>
+                <p>{{ overall_percentage }}%</p>
+            </div>
+        </div>
+
+        
+        <!-- Navigation Buttons -->
+        <div style="margin-top: 30px;">
+            <button onclick="location.href='/add_student'">Add Student</button>
+            <button onclick="location.href='/students'">View Students</button>
+            <button onclick="location.href='/reports'">View Reports</button>
+            <button onclick="location.href='/logout'">Logout</button>
+        </div>
+    <a href="{{ url_for('approve_attendance') }}">
+        <button style="padding:10px 20px; margin-top:20px;">
+        ✅ Approve Attendance
+        </button>
+    </a>
+
+    </div>
+</div>
+{% endblock %}

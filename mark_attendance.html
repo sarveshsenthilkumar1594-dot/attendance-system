@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 style="text-align:center;">Capture Face for Attendance</h2>
+
+<div style="text-align:center;">
+    <video id="video" width="400" autoplay></video>
+    <br><br>
+    <button onclick="capture()">Capture</button>
+    <canvas id="canvas" style="display:none;"></canvas>
+</div>
+
+<script>
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(stream => {
+    document.getElementById('video').srcObject = stream;
+});
+
+function capture() {
+    var canvas = document.getElementById('canvas');
+    var video = document.getElementById('video');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    canvas.getContext('2d').drawImage(video, 0, 0);
+
+    alert("Photo captured! (Next step: Send to admin approval)");
+}
+</script>
+
+{% endblock %}

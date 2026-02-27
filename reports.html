@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card card-large">
+        <h2>Attendance Report</h2>
+
+        <!-- FILTER FORM -->
+        <form method="GET">
+            <input type="text" 
+                   name="department" 
+                   placeholder="Department"
+                   value="{{ request.args.get('department','') }}">
+
+            <select name="year">
+                <option value="">Select Year</option>
+                <option {% if request.args.get('year')=='1st Year' %}selected{% endif %}>1st Year</option>
+                <option {% if request.args.get('year')=='2nd Year' %}selected{% endif %}>2nd Year</option>
+                <option {% if request.args.get('year')=='3rd Year' %}selected{% endif %}>3rd Year</option>
+                <option {% if request.args.get('year')=='4th Year' %}selected{% endif %}>4th Year</option>
+            </select>
+
+            <select name="semester">
+                <option value="">Select Semester</option>
+                <option {% if request.args.get('semester')=='Semester 1' %}selected{% endif %}>Semester 1</option>
+                <option {% if request.args.get('semester')=='Semester 2' %}selected{% endif %}>Semester 2</option>
+                <option {% if request.args.get('semester')=='Semester 3' %}selected{% endif %}>Semester 3</option>
+                <option {% if request.args.get('semester')=='Semester 4' %}selected{% endif %}>Semester 4</option>
+                <option {% if request.args.get('semester')=='Semester 5' %}selected{% endif %}>Semester 5</option>
+                <option {% if request.args.get('semester')=='Semester 6' %}selected{% endif %}>Semester 6</option>
+                <option {% if request.args.get('semester')=='Semester 7' %}selected{% endif %}>Semester 7</option>
+                <option {% if request.args.get('semester')=='Semester 8' %}selected{% endif %}>Semester 8</option>
+            </select>
+
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- REPORT TABLE -->
+        <table class="styled-table">
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Semester</th>
+                <th>Total Days</th>
+                <th>Present</th>
+                <th>Absent</th>
+                <th>Attendance %</th>
+            </tr>
+
+            {% for r in report_data %}
+            <tr>
+                <td>{{ r.name }}</td>
+                <td>{{ r.roll_no }}</td>
+                <td>{{ r.department }}</td>
+                <td>{{ r.year }}</td>
+                <td>{{ r.semester }}</td>
+                <td>{{ r.total }}</td>
+                <td>{{ r.present }}</td>
+                <td>{{ r.absent }}</td>
+                <td>{{ r.percentage }}%</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% if report_data|length == 0 %}
+            <p style="margin-top:15px;">No records found.</p>
+        {% endif %}
+
+        <!-- EXPORT BUTTON -->
+        <form method="GET" action="/export" style="margin-top:15px;">
+            <input type="hidden" name="department" value="{{ request.args.get('department','') }}">
+            <input type="hidden" name="year" value="{{ request.args.get('year','') }}">
+            <input type="hidden" name="semester" value="{{ request.args.get('semester','') }}">
+            <button type="submit">Export Filtered Report</button>
+        </form>
+
+        <!-- BACK BUTTON -->
+        <button onclick="location.href='/dashboard'" style="margin-top:10px;">
+            Back to Dashboard
+        </button>
+
+    </div>
+</div>
+{% endblock %}
