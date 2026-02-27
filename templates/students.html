@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card card-large" style="width: 650px;">
+        <h2>Students List</h2>
+
+        <table class="styled-table">
+<tr>
+    <th>Name</th>
+    <th>Roll No</th>
+    <th>Department</th>
+    <th>Year</th>
+    <th>Semester</th>
+    <th>Actions</th>
+</tr>
+
+{% for student in students %}
+<tr>
+    <td>{{ student.name }}</td>
+    <td>{{ student.roll_no }}</td>
+    <td>{{ student.department }}</td>
+    <td>{{ student.year }}</td>
+    <td>{{ student.semester }}</td>
+    <td>
+        <button onclick="location.href='/mark/{{ student.id }}'">
+            Mark Present
+        </button>
+        <button onclick="location.href='/change_password/{{ student.id }}'">
+            Change Password
+        </button>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+        <br>
+
+        <button onclick="location.href='/dashboard'">
+            Back to Dashboard
+        </button>
+    </div>
+</div>
+{% endblock %}

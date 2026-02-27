@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="login-box" style="width: 500px;">
+        <h2>Attendance Report</h2>
+
+        <table border="1" width="100%" cellpadding="5">
+            <tr>
+                <th>Student Name</th>
+                <th>Roll No</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+
+            {% for row in records %}
+            <tr>
+                <td>{{ row["name"] }}</td>
+                <td>{{ row["roll_no"] }}</td>
+                <td>{{ row["date"] }}</td>
+                <td>{{ row["status"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <button onclick="location.href='/dashboard'">
+            Back to Dashboard
+        </button>
+    </div>
+</div>
+{% endblock %}
