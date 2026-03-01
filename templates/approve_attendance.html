@@ -19,6 +19,7 @@
             <th>Roll No</th>
             <th>Date</th>
             <th>Time</th>
+            <th>photo</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -29,6 +30,9 @@
             <td>{{ row.roll_no }}</td>
             <td>{{ row.date }}</td>
             <td>{{ row.time }}</td>
+            <td>
+               <img src="{{ url_for('static', filename='uploads/ +p.photo') }}" width="100">
+            </td>
             <td>{{ row.status }}</td>
             <td>
                 <a href="{{ url_for('approve', attendance_id=row.id) }}">
